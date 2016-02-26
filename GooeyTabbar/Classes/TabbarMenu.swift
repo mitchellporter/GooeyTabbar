@@ -84,6 +84,8 @@ class TabbarMenu: UIView{
         // drawRect is called as the animation is happening. My guess is that it's called
         // every time setNeedsDisplay is called, which is in the display link's update method.
         
+        layer.borderWidth = 0
+        
         
         let path = UIBezierPath()
         path.moveToPoint(CGPoint(x: 0, y: 0)) // top left corner
@@ -223,7 +225,7 @@ class TabbarMenu: UIView{
                     // START OF DROP DOWN ANIMATION
                     // This is the animation where entire view drops
                     // Time collision animation / effects on icons with this one
-                    UIView.animateWithDuration(5.3, delay: 0.0, options: .CurveEaseOut, animations: { () -> Void in
+                    UIView.animateWithDuration(0.3, delay: 0.0, options: .CurveEaseOut, animations: { () -> Void in
                         self.frame = self.terminalFrame!
                         }, completion: { (finish) -> Void in
 //                            self.spinIconsAnimation()
@@ -232,12 +234,12 @@ class TabbarMenu: UIView{
                     
                     // END OF DROP DOWN ANIMATION
                     
-                    UIView.animateWithDuration(5.3, delay: 0.2, options: .CurveEaseOut, animations: { () -> Void in
+                    UIView.animateWithDuration(0.3, delay: 0.2, options: .CurveEaseOut, animations: { () -> Void in
                         self.normalRect.center = CGPoint(x: self.normalRect.center.x, y: 567.0)
                         self.blurView.alpha = 1.0
                         }, completion: nil)
                     
-                    UIView.animateWithDuration(5.0, delay: 0.2, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.0, options: .CurveEaseOut, animations: { () -> Void in
+                    UIView.animateWithDuration(1.0, delay: 0.2, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.0, options: .CurveEaseOut, animations: { () -> Void in
                         self.springRect.center = CGPoint(x: self.springRect.center.x, y: 567.0)
                         }, completion: { (finish) -> Void in
                             self.finishAnimation()
