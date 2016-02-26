@@ -48,7 +48,8 @@ class TabbarMenu: UIView{
     {
         tabbarheight = tabbarHeight
         terminalFrame = CGRect(x: 0, y: 0, width: UIScreen.mainScreen().bounds.size.width, height: UIScreen.mainScreen().bounds.size.height)
-        initialFrame = CGRect(x: 0, y: 0 - terminalFrame!.height + tabbarHeight + TOPSPACE, width: terminalFrame!.width, height: terminalFrame!.height)
+        initialFrame = CGRect(x: 0, y: -UIScreen.mainScreen().bounds.height + tabbarHeight + TOPSPACE, width: terminalFrame!.width, height: terminalFrame!.height)
+        // initial frame simply shows the tab bar height + top space on screen, everything else is hidden
         super.init(frame: initialFrame!)
 
     }
