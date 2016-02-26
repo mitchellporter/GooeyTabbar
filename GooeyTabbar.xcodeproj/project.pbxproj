@@ -16,6 +16,8 @@
 		94E12C3F1BF97E8F00DA2010 /* GooeyTabbarUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94E12C3E1BF97E8F00DA2010 /* GooeyTabbarUITests.swift */; };
 		94E12C4D1BF9A8E500DA2010 /* TabbarMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94E12C4C1BF9A8E500DA2010 /* TabbarMenu.swift */; };
 		94E12C4F1BF9FBA000DA2010 /* AnimatedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94E12C4E1BF9FBA000DA2010 /* AnimatedButton.swift */; };
+		C3C3253E1C7FC9DA00C3F577 /* BLYFilterMenuCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C3253C1C7FC9DA00C3F577 /* BLYFilterMenuCollectionCell.swift */; };
+		C3C3253F1C7FC9DA00C3F577 /* BLYFilterMenuCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3C3253D1C7FC9DA00C3F577 /* BLYFilterMenuCollectionCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +53,8 @@
 		94E12C401BF97E8F00DA2010 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		94E12C4C1BF9A8E500DA2010 /* TabbarMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TabbarMenu.swift; path = Classes/TabbarMenu.swift; sourceTree = "<group>"; };
 		94E12C4E1BF9FBA000DA2010 /* AnimatedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AnimatedButton.swift; path = Classes/AnimatedButton.swift; sourceTree = "<group>"; };
+		C3C3253C1C7FC9DA00C3F577 /* BLYFilterMenuCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLYFilterMenuCollectionCell.swift; sourceTree = "<group>"; };
+		C3C3253D1C7FC9DA00C3F577 /* BLYFilterMenuCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BLYFilterMenuCollectionCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +105,8 @@
 		94E12C1D1BF97E8F00DA2010 /* GooeyTabbar */ = {
 			isa = PBXGroup;
 			children = (
+				C3C3253C1C7FC9DA00C3F577 /* BLYFilterMenuCollectionCell.swift */,
+				C3C3253D1C7FC9DA00C3F577 /* BLYFilterMenuCollectionCell.xib */,
 				94E12C1E1BF97E8F00DA2010 /* AppDelegate.swift */,
 				94E12C201BF97E8F00DA2010 /* ViewController.swift */,
 				94E12C4C1BF9A8E500DA2010 /* TabbarMenu.swift */,
@@ -237,6 +243,7 @@
 			files = (
 				94E12C291BF97E8F00DA2010 /* LaunchScreen.storyboard in Resources */,
 				94E12C261BF97E8F00DA2010 /* Assets.xcassets in Resources */,
+				C3C3253F1C7FC9DA00C3F577 /* BLYFilterMenuCollectionCell.xib in Resources */,
 				94E12C241BF97E8F00DA2010 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -263,6 +270,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				94E12C211BF97E8F00DA2010 /* ViewController.swift in Sources */,
+				C3C3253E1C7FC9DA00C3F577 /* BLYFilterMenuCollectionCell.swift in Sources */,
 				94E12C1F1BF97E8F00DA2010 /* AppDelegate.swift in Sources */,
 				94E12C4F1BF9FBA000DA2010 /* AnimatedButton.swift in Sources */,
 				94E12C4D1BF9A8E500DA2010 /* TabbarMenu.swift in Sources */,
@@ -492,6 +500,7 @@
 				94E12C451BF97E8F00DA2010 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		94E12C461BF97E8F00DA2010 /* Build configuration list for PBXNativeTarget "GooeyTabbarTests" */ = {
 			isa = XCConfigurationList;
@@ -500,6 +509,7 @@
 				94E12C481BF97E8F00DA2010 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		94E12C491BF97E8F00DA2010 /* Build configuration list for PBXNativeTarget "GooeyTabbarUITests" */ = {
 			isa = XCConfigurationList;
@@ -508,6 +518,7 @@
 				94E12C4B1BF97E8F00DA2010 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -8,11 +8,24 @@
 
 import UIKit
 
+protocol TabbarMenuDataSource {
+    func numberOfFilterRows() -> Int
+    func filterDataForRow(row: Int) -> [String: AnyObject]
+}
+
+protocol TabbarMenuDelegate {
+    func didSelectFilterRow(indexPath: NSIndexPath)
+}
+
 class TabbarMenu: UIView{
     
     /// 是否打开
     var opened : Bool = false
-    
+    var collectionView: UICollectionView!
+    var flowLayout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+    var dataSource: TabbarMenuDataSource!
+    var delegate: TabbarMenuDelegate!
+
     private var normalRect : UIView!
     private var springRect : UIView!
     private var keyWindow  : UIWindow!
@@ -33,9 +46,9 @@ class TabbarMenu: UIView{
         terminalFrame = CGRect(x: 0, y: 0, width: UIScreen.mainScreen().bounds.size.width, height: UIScreen.mainScreen().bounds.size.height)
         initialFrame = CGRect(x: 0, y: 0 - terminalFrame!.height + tabbarHeight + TOPSPACE, width: terminalFrame!.width, height: terminalFrame!.height)
         super.init(frame: initialFrame!)
-        setUpViews()
+//        setupCollectionView()
+//        setUpViews()
     }
-    
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -81,8 +94,20 @@ class TabbarMenu: UIView{
         CGContextFillPath(context)
     }
     
+    func setupCollectionView() {
+        
+        collectionView = UICollectionView(frame: CGRectMake(0, 0, bounds.size.width, bounds.size.height), collectionViewLayout: flowLayout)
+        collectionView.registerNib(UINib(nibName: "BLYFilterMenuCollectionCell", bundle: nil), forCellWithReuseIdentifier: "cell")
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        
+        // Style
+        collectionView.backgroundColor = UIColor.clearColor()
+        flowLayout.minimumLineSpacing = 0.0
+        flowLayout.minimumInteritemSpacing = 0.0
+    }
     
-    private func setUpViews()
+    func setUpViews()
     {
         keyWindow = UIApplication.sharedApplication().keyWindow
         
@@ -109,6 +134,10 @@ class TabbarMenu: UIView{
         keyWindow.addSubview(springRect)
         
         
+        // Add the collection view
+        self.addSubview(collectionView)
+
+        
         // At bottom of entire view, then minus top space (clear),
         animateButton = AnimatedButton(frame: CGRect(x: 0, y: terminalFrame!.height - TOPSPACE - tabbarheight!, width: 50, height: 30))
         //    animateButton = AnimatedButton(frame: CGRect(x: 0, y: (terminalFrame!.height - TOPSPACE) - (tabbarheight! - 30), width: 50, height: 30))
@@ -117,7 +146,7 @@ class TabbarMenu: UIView{
             self.triggerAction()
         }
         
-    }
+          }
     
     func triggerAction()
     {
@@ -217,6 +246,90 @@ class TabbarMenu: UIView{
             displayLink = nil
         }
     }
-    
-    
 }
+
+extension TabbarMenu: UICollectionViewDelegateFlowLayout {
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        return CGSizeMake(collectionView.frame.size.width, 68.0)
+    }
+}
+
+extension TabbarMenu: UICollectionViewDelegate, UICollectionViewDataSource {
+    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return dataSource.numberOfFilterRows()
+    }
+    
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let filterData = dataSource.filterDataForRow(indexPath.row)
+        
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("cell", forIndexPath: indexPath) as! BLYFilterMenuCollectionCell
+        cell.iconImageView.image = UIImage(named: filterData["imageName"] as! String)
+        cell.label!.text = filterData["name"] as? String
+        cell.backgroundColor = filterData["backgroundColor"] as? UIColor
+        return cell
+    }
+    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        //        delegate.didSelectFilterRow(indexPath)
+        
+        // Part 1 - Play with cell z-index + cell movements
+        //        let selectedCell = collectionView.cellForItemAtIndexPath(indexPath)
+        //        selectedCell?.layer.zPosition = 10.0
+        //
+        //        let visibleCells = collectionView.visibleCells
+        //        let visibleIndexPaths = collectionView.indexPathsForVisibleItems()
+        //
+        //        for visibleIndexPath in visibleIndexPaths {
+        //            if visibleIndexPath.row < indexPath.row {
+        //                print("cell above selected cell")
+        //                let cellAbove = collectionView.cellForItemAtIndexPath(visibleIndexPath)
+        //                UIView.animateWithDuration(2.0, animations: { () -> Void in
+        //                    selectedCell?.frame = cellAbove!.frame
+        //                })
+        //            }
+        //        }
+        
+        // Part 2 - move selected cell underneath the top cell
+        //        let firstCell = collectionView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1))
+        //        let firstCell = collectionView.cellForItemAtIndexPath(NSIndexPath(forRow: 0, inSection: 1))
+        
+        
+        // PART 1: Animate all cells into the first cell
+//        let selectedCell = collectionView.cellForItemAtIndexPath(indexPath) as! BLYFilterMenuCollectionCell
+//        let visibleIndexPaths = collectionView.indexPathsForVisibleItems()
+//        
+//        let sortedIndexPaths = visibleIndexPaths.sort {$0.row < $1.row}
+//        let firstCell = collectionView.cellForItemAtIndexPath(sortedIndexPaths.first!) as! BLYFilterMenuCollectionCell
+//        firstCell.layer.zPosition = 10.0
+//        
+//        for visibleIndexPath in sortedIndexPaths {
+//            // Skip the first cell for testing
+//            if visibleIndexPath.row == 0 {
+//                continue
+//            }
+//            
+//            let cellAbove = collectionView.cellForItemAtIndexPath(visibleIndexPath)
+//            UIView.animateWithDuration(0.2, animations: { () -> Void in
+//                cellAbove!.frame = firstCell.frame
+//            })
+//        }
+        
+        // PART 2: First cell needs it's background color, label, and image icon set to match selected cell
+        // A. Shape layer will explode new color into first cell. See here: https://github.com/Ramotion/paper-switch
+        // B. Icon image view will spin from the shape layer explosion
+        // C. Look into using some type of explosion / fireworks / CAReplicatorLayer?
+        // so that you can have an "explosion effect from the new selected cell snapping into place"
+        
+//        firstCell.label.text = selectedCell.label.text
+//        firstCell.iconImageView.image = selectedCell.iconImageView.image
+//        firstCell.iconImageView.layer.addAnimation(CAAnimation.animationForAdditionalButton(), forKey: nil)
+//        firstCell.backgroundColor = selectedCell.backgroundColor
+        
+    }
+}
+
+
