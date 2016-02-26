@@ -84,8 +84,9 @@ class TabbarMenu: UIView{
         // drawRect is called as the animation is happening. My guess is that it's called
         // every time setNeedsDisplay is called, which is in the display link's update method.
         
-        layer.borderWidth = 0
-        
+        // TODO: Fix 1px Line Problem
+        // Right now the color of the menu is causing the 
+        // 1px line to show in-between the cells
         
         let path = UIBezierPath()
         path.moveToPoint(CGPoint(x: 0, y: 0)) // top left corner
@@ -348,7 +349,21 @@ extension TabbarMenu: UICollectionViewDelegate, UICollectionViewDataSource {
         let filterData = dataSource.filterDataForRow(indexPath.row)
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("cell", forIndexPath: indexPath) as! BLYFilterMenuCollectionCell
+        
+        cell.clipsToBounds = true
+        cell.layer.masksToBounds = true
+        cell.contentView.clipsToBounds = true
+        cell.contentView.layer.masksToBounds = true
+        
+        cell.iconImageView.clipsToBounds = true
+        cell.iconImageView.layer.masksToBounds = true
+
+        
         cell.iconImageView.image = UIImage(named: filterData["imageName"] as! String)
+        
+        cell.iconImageView.clipsToBounds = true
+        cell.iconImageView.layer.masksToBounds = true
+        
         cell.label!.text = filterData["name"] as? String
 
         
