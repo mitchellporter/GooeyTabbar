@@ -186,7 +186,7 @@ class TabbarMenu: UIView{
 
         
         // At bottom of entire view, then minus top space (clear),
-        animateButton = AnimatedButton(frame: CGRect(x: 0, y: terminalFrame!.height - TOPSPACE - tabbarheight!, width: 50, height: 30))
+        animateButton = AnimatedButton(frame: CGRect(x: 0, y: self.frame.height - TOPSPACE - ((tabbarheight! + 30)/2), width: 50, height: 30))
         self.addSubview(animateButton!)
         animateButton!.didTapped = { (button) -> () in
             self.triggerAction()
