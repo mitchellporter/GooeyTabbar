@@ -25,6 +25,8 @@ class TabbarMenu: UIView{
     var flowLayout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
     var dataSource: TabbarMenuDataSource!
     var delegate: TabbarMenuDelegate!
+    
+    var lastCell: BLYFilterMenuCollectionCell!
 
     private var normalRect : UIView!
     private var springRect : UIView!
@@ -46,13 +48,13 @@ class TabbarMenu: UIView{
         terminalFrame = CGRect(x: 0, y: 0, width: UIScreen.mainScreen().bounds.size.width, height: UIScreen.mainScreen().bounds.size.height)
         initialFrame = CGRect(x: 0, y: 0 - terminalFrame!.height + tabbarHeight + TOPSPACE, width: terminalFrame!.width, height: terminalFrame!.height)
         super.init(frame: initialFrame!)
-//        setupCollectionView()
-//        setUpViews()
+
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
     
     
     override func drawRect(rect: CGRect)
@@ -82,21 +84,22 @@ class TabbarMenu: UIView{
         
         
         let path = UIBezierPath()
-        path.moveToPoint(CGPoint(x: 0, y: 0)) // Bottom left corner
-        path.addLineToPoint(CGPoint(x: self.frame.width, y: 0)) // Bottom right corner
+        path.moveToPoint(CGPoint(x: 0, y: 0)) // top left corner
+        path.addLineToPoint(CGPoint(x: self.frame.width, y: 0)) // top right corner
         path.addLineToPoint(CGPoint(x: self.frame.width, y: self.frame.height - TOPSPACE))
         path.addQuadCurveToPoint(CGPoint(x: 0, y: self.frame.height - TOPSPACE), controlPoint: CGPoint(x: self.frame.width/2, y: self.frame.height - TOPSPACE-diff))
         path.closePath()
         
         let context = UIGraphicsGetCurrentContext()
         CGContextAddPath(context, path.CGPath)
-        UIColor(colorLiteralRed: 50/255.0, green: 58/255.0, blue: 68/255.0, alpha: 1.0).set()
+        UIColor(red:0.863,  green:0.318,  blue:0.604, alpha:1).set() // Pink
+//        UIColor(red:0.945,  green:0.800,  blue:0.012, alpha:1).set() // Yellow
         CGContextFillPath(context)
     }
     
     func setupCollectionView() {
         
-        collectionView = UICollectionView(frame: CGRectMake(0, 0, bounds.size.width, bounds.size.height), collectionViewLayout: flowLayout)
+        collectionView = UICollectionView(frame: CGRectMake(0, 0, bounds.size.width, self.frame.height - TOPSPACE), collectionViewLayout: flowLayout)
         collectionView.registerNib(UINib(nibName: "BLYFilterMenuCollectionCell", bundle: nil), forCellWithReuseIdentifier: "cell")
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -105,10 +108,40 @@ class TabbarMenu: UIView{
         collectionView.backgroundColor = UIColor.clearColor()
         flowLayout.minimumLineSpacing = 0.0
         flowLayout.minimumInteritemSpacing = 0.0
+        
+        collectionViewBackgroundHack()
+    }
+    
+    func collectionViewBackgroundHack() {
+//        let newView = UIView(frame: bounds)
+//        let top = UIView(frame: CGRectMake(0, 0, bounds.size.width, bounds.size.height/2))
+//        let bottom = UIView(frame: CGRectMake(0, bounds.size.height/2, bounds.size.width, newView.bounds.size.height/2))
+//        
+//        let topData = defaultFilterMenuData.first
+//        top.backgroundColor = topData!["backgroundColor"] as? UIColor
+//        
+//        let bottomData = defaultFilterMenuData.last
+//        bottom.backgroundColor = bottomData!["backgroundColor"] as? UIColor
+//        
+//        newView.addSubview(top)
+//        newView.addSubview(bottom)
+//        addSubview(newView)
+//        
+//        bringSubviewToFront(collectionView)
+//        collectionView.backgroundColor = .clearColor()
+        
+//        var collectionViewFrame = collectionView.frame
+//        collectionViewFrame.origin.y -= CGFloat(68)
+//        collectionViewFrame.size.height += CGFloat(68)
+//        collectionView.frame = collectionViewFrame
     }
     
     func setUpViews()
     {
+
+        self.clipsToBounds = true
+        self.layer.masksToBounds = true
+        
         keyWindow = UIApplication.sharedApplication().keyWindow
         
         blurView = UIVisualEffectView(effect: UIBlurEffect(style: .Dark))
@@ -146,7 +179,18 @@ class TabbarMenu: UIView{
             self.triggerAction()
         }
         
-          }
+       
+        }
+    
+    func spinIconsAnimation() {
+        let visibleIndexPaths = self.collectionView.indexPathsForVisibleItems()
+        let sortedIndexPaths = visibleIndexPaths.sort {$0.row > $1.row}
+        
+        for visibleIndexPath in sortedIndexPaths {
+            let cellAbove = self.collectionView.cellForItemAtIndexPath(visibleIndexPath) as! BLYFilterMenuCollectionCell
+            cellAbove.iconImageView.layer.addAnimation(CAAnimation.animationForAdditionalButton(), forKey: nil)
+        }
+    }
     
     func triggerAction()
     {
@@ -166,9 +210,18 @@ class TabbarMenu: UIView{
             UIView.animateWithDuration(0.3, delay: 0.0, options: .CurveEaseOut, animations: { () -> Void in
                 self.springRect.center = CGPoint(x: self.springRect.center.x, y: self.springRect.center.y + 40)
                 }) { (finish) -> Void in
+                    
+                    // START OF DROP DOWN ANIMATION
+                    // This is the animation where entire view drops
+                    // Time collision animation / effects on icons with this one
                     UIView.animateWithDuration(0.3, delay: 0.0, options: .CurveEaseOut, animations: { () -> Void in
                         self.frame = self.terminalFrame!
-                        }, completion: nil)
+                        }, completion: { (finish) -> Void in
+//                            self.spinIconsAnimation()
+                    })
+
+                    
+                    // END OF DROP DOWN ANIMATION
                     
                     UIView.animateWithDuration(0.3, delay: 0.2, options: .CurveEaseOut, animations: { () -> Void in
                         self.normalRect.center = CGPoint(x: self.normalRect.center.x, y: 100)
@@ -187,6 +240,9 @@ class TabbarMenu: UIView{
             */
             opened = false
             startAnimation()
+            
+            // START OF BACK UP ANIMATION
+            // This is the animation where entire view goes back up
             UIView.animateWithDuration(0.3, delay: 0.0, options: .CurveEaseOut, animations: { () -> Void in
                 self.frame = self.initialFrame!
                 }, completion: nil)
@@ -221,9 +277,12 @@ class TabbarMenu: UIView{
         let normalRectFrame = normalRectLayer!.valueForKey("frame")!.CGRectValue
         let springRectFrame = springRectLayer!.valueForKey("frame")!.CGRectValue
         
+        lastCell.diff = normalRectFrame.origin.y - springRectFrame.origin.y
         diff = normalRectFrame.origin.y - springRectFrame.origin.y
-        print("=====\(diff)")
         
+//        print("=====\(diff)")
+        
+        lastCell.setNeedsDisplay()
         self.setNeedsDisplay()
     }
     
@@ -250,7 +309,7 @@ class TabbarMenu: UIView{
 
 extension TabbarMenu: UICollectionViewDelegateFlowLayout {
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        return CGSizeMake(collectionView.frame.size.width, 68.0)
+        return CGSizeMake(collectionView.frame.size.width, 75.375)
     }
 }
 
@@ -269,29 +328,36 @@ extension TabbarMenu: UICollectionViewDelegate, UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("cell", forIndexPath: indexPath) as! BLYFilterMenuCollectionCell
         cell.iconImageView.image = UIImage(named: filterData["imageName"] as! String)
         cell.label!.text = filterData["name"] as? String
-        cell.backgroundColor = filterData["backgroundColor"] as? UIColor
+        
+        if indexPath.row == 7 {
+            lastCell = cell
+            cell.backgroundColor = UIColor.clearColor()
+        } else {
+            cell.backgroundColor = filterData["backgroundColor"] as? UIColor
+        }
+        
         return cell
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         //        delegate.didSelectFilterRow(indexPath)
         
-        // Part 1 - Play with cell z-index + cell movements
-        //        let selectedCell = collectionView.cellForItemAtIndexPath(indexPath)
-        //        selectedCell?.layer.zPosition = 10.0
-        //
-        //        let visibleCells = collectionView.visibleCells
-        //        let visibleIndexPaths = collectionView.indexPathsForVisibleItems()
-        //
-        //        for visibleIndexPath in visibleIndexPaths {
-        //            if visibleIndexPath.row < indexPath.row {
-        //                print("cell above selected cell")
-        //                let cellAbove = collectionView.cellForItemAtIndexPath(visibleIndexPath)
-        //                UIView.animateWithDuration(2.0, animations: { () -> Void in
-        //                    selectedCell?.frame = cellAbove!.frame
-        //                })
-        //            }
-        //        }
+//         Part 1 - Play with cell z-index + cell movements
+//                let selectedCell = collectionView.cellForItemAtIndexPath(indexPath)
+//                selectedCell?.layer.zPosition = 10.0
+//        
+//                let visibleCells = collectionView.visibleCells
+//                let visibleIndexPaths = collectionView.indexPathsForVisibleItems()
+//        
+//                for visibleIndexPath in visibleIndexPaths {
+//                    if visibleIndexPath.row < indexPath.row {
+//                        print("cell above selected cell")
+//                        let cellAbove = collectionView.cellForItemAtIndexPath(visibleIndexPath)
+//                        UIView.animateWithDuration(2.0, animations: { () -> Void in
+//                            selectedCell?.frame = cellAbove!.frame
+//                        })
+//                    }
+//                }
         
         // Part 2 - move selected cell underneath the top cell
         //        let firstCell = collectionView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1))

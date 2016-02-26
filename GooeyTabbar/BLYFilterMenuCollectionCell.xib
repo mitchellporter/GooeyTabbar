@@ -13,10 +13,10 @@
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                 <rect key="frame" x="0.0" y="0.0" width="375" height="68"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="trending-image-filter-menu" translatesAutoresizingMaskIntoConstraints="NO" id="C0R-0z-GKI">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="trending-image-filter-menu" translatesAutoresizingMaskIntoConstraints="NO" id="C0R-0z-GKI">
                         <rect key="frame" x="36" y="18" width="30" height="31"/>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="TRENDING" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dsw-eH-QUY">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TRENDING" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dsw-eH-QUY">
                         <rect key="frame" x="75" y="25.5" width="74" height="17"/>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -36,6 +36,7 @@
                 <outlet property="iconImageView" destination="C0R-0z-GKI" id="fu9-Dv-dcJ"/>
                 <outlet property="label" destination="dsw-eH-QUY" id="XoE-ts-m2N"/>
             </connections>
+            <point key="canvasLocation" x="474.5" y="344"/>
         </collectionViewCell>
     </objects>
     <resources>

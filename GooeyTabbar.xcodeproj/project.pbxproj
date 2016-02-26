@@ -18,6 +18,9 @@
 		94E12C4F1BF9FBA000DA2010 /* AnimatedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94E12C4E1BF9FBA000DA2010 /* AnimatedButton.swift */; };
 		C3C3253E1C7FC9DA00C3F577 /* BLYFilterMenuCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C3253C1C7FC9DA00C3F577 /* BLYFilterMenuCollectionCell.swift */; };
 		C3C3253F1C7FC9DA00C3F577 /* BLYFilterMenuCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3C3253D1C7FC9DA00C3F577 /* BLYFilterMenuCollectionCell.xib */; };
+		C3C325491C7FD9BD00C3F577 /* YALSpringAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = C3C325441C7FD9BD00C3F577 /* YALSpringAnimation.m */; };
+		C3C3254A1C7FD9BD00C3F577 /* YALAnimatingTabBarConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = C3C325461C7FD9BD00C3F577 /* YALAnimatingTabBarConstants.m */; };
+		C3C3254B1C7FD9BD00C3F577 /* CAAnimation+YALTabBarViewAnimations.m in Sources */ = {isa = PBXBuildFile; fileRef = C3C325481C7FD9BD00C3F577 /* CAAnimation+YALTabBarViewAnimations.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +58,14 @@
 		94E12C4E1BF9FBA000DA2010 /* AnimatedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AnimatedButton.swift; path = Classes/AnimatedButton.swift; sourceTree = "<group>"; };
 		C3C3253C1C7FC9DA00C3F577 /* BLYFilterMenuCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLYFilterMenuCollectionCell.swift; sourceTree = "<group>"; };
 		C3C3253D1C7FC9DA00C3F577 /* BLYFilterMenuCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BLYFilterMenuCollectionCell.xib; sourceTree = "<group>"; };
+		C3C325401C7FD66E00C3F577 /* Reveal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Reveal.framework; sourceTree = "<group>"; };
+		C3C325421C7FD9BC00C3F577 /* GooeyTabbar-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GooeyTabbar-Bridging-Header.h"; sourceTree = "<group>"; };
+		C3C325431C7FD9BD00C3F577 /* YALSpringAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YALSpringAnimation.h; sourceTree = "<group>"; };
+		C3C325441C7FD9BD00C3F577 /* YALSpringAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YALSpringAnimation.m; sourceTree = "<group>"; };
+		C3C325451C7FD9BD00C3F577 /* YALAnimatingTabBarConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YALAnimatingTabBarConstants.h; sourceTree = "<group>"; };
+		C3C325461C7FD9BD00C3F577 /* YALAnimatingTabBarConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YALAnimatingTabBarConstants.m; sourceTree = "<group>"; };
+		C3C325471C7FD9BD00C3F577 /* CAAnimation+YALTabBarViewAnimations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CAAnimation+YALTabBarViewAnimations.h"; sourceTree = "<group>"; };
+		C3C325481C7FD9BD00C3F577 /* CAAnimation+YALTabBarViewAnimations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CAAnimation+YALTabBarViewAnimations.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +116,13 @@
 		94E12C1D1BF97E8F00DA2010 /* GooeyTabbar */ = {
 			isa = PBXGroup;
 			children = (
+				C3C325401C7FD66E00C3F577 /* Reveal.framework */,
+				C3C325431C7FD9BD00C3F577 /* YALSpringAnimation.h */,
+				C3C325441C7FD9BD00C3F577 /* YALSpringAnimation.m */,
+				C3C325451C7FD9BD00C3F577 /* YALAnimatingTabBarConstants.h */,
+				C3C325461C7FD9BD00C3F577 /* YALAnimatingTabBarConstants.m */,
+				C3C325471C7FD9BD00C3F577 /* CAAnimation+YALTabBarViewAnimations.h */,
+				C3C325481C7FD9BD00C3F577 /* CAAnimation+YALTabBarViewAnimations.m */,
 				C3C3253C1C7FC9DA00C3F577 /* BLYFilterMenuCollectionCell.swift */,
 				C3C3253D1C7FC9DA00C3F577 /* BLYFilterMenuCollectionCell.xib */,
 				94E12C1E1BF97E8F00DA2010 /* AppDelegate.swift */,
@@ -115,6 +133,7 @@
 				94E12C251BF97E8F00DA2010 /* Assets.xcassets */,
 				94E12C271BF97E8F00DA2010 /* LaunchScreen.storyboard */,
 				94E12C2A1BF97E8F00DA2010 /* Info.plist */,
+				C3C325421C7FD9BC00C3F577 /* GooeyTabbar-Bridging-Header.h */,
 			);
 			path = GooeyTabbar;
 			sourceTree = "<group>";
@@ -199,7 +218,7 @@
 		94E12C131BF97E8F00DA2010 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0710;
+				LastSwiftUpdateCheck = 0720;
 				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = KittenYang;
 				TargetAttributes = {
@@ -273,7 +292,10 @@
 				C3C3253E1C7FC9DA00C3F577 /* BLYFilterMenuCollectionCell.swift in Sources */,
 				94E12C1F1BF97E8F00DA2010 /* AppDelegate.swift in Sources */,
 				94E12C4F1BF9FBA000DA2010 /* AnimatedButton.swift in Sources */,
+				C3C325491C7FD9BD00C3F577 /* YALSpringAnimation.m in Sources */,
 				94E12C4D1BF9A8E500DA2010 /* TabbarMenu.swift in Sources */,
+				C3C3254A1C7FD9BD00C3F577 /* YALAnimatingTabBarConstants.m in Sources */,
+				C3C3254B1C7FD9BD00C3F577 /* CAAnimation+YALTabBarViewAnimations.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -415,10 +437,23 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/GooeyTabbar",
+				);
 				INFOPLIST_FILE = GooeyTabbar/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lz",
+					"-framework",
+					Reveal,
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.kittenyang.GooeyTabbar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "GooeyTabbar/GooeyTabbar-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -426,10 +461,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/GooeyTabbar",
+				);
 				INFOPLIST_FILE = GooeyTabbar/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.kittenyang.GooeyTabbar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "GooeyTabbar/GooeyTabbar-Bridging-Header.h";
 			};
 			name = Release;
 		};
