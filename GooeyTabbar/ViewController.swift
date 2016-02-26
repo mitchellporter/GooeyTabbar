@@ -72,6 +72,7 @@ class ViewController: UIViewController {
 
     var menu : TabbarMenu!
     var selectedFilterMenuData = defaultFilterMenuData
+    let TOPSPACE : CGFloat = 64.0 //留白
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -83,7 +84,8 @@ class ViewController: UIViewController {
     }
   
   override func viewDidAppear(animated: Bool) {
-    menu = TabbarMenu(tabbarHeight: 75.375) // Original value was 40.0
+//    print((UIScreen.mainScreen().bounds.size.height - TOPSPACE) / 8)
+    menu = TabbarMenu(tabbarHeight: (UIScreen.mainScreen().bounds.size.height - TOPSPACE) / 8) // Original value was 40.0
     menu.dataSource = self
     menu.delegate = self
     menu.setupCollectionView()
