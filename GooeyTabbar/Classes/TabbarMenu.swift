@@ -87,6 +87,9 @@ class TabbarMenu: UIView{
         path.moveToPoint(CGPoint(x: 0, y: 0)) // top left corner
         path.addLineToPoint(CGPoint(x: self.frame.width, y: 0)) // top right corner
         path.addLineToPoint(CGPoint(x: self.frame.width, y: self.frame.height - TOPSPACE))
+        
+        print(self.frame.height - TOPSPACE)
+        
         path.addQuadCurveToPoint(CGPoint(x: 0, y: self.frame.height - TOPSPACE), controlPoint: CGPoint(x: self.frame.width/2, y: self.frame.height - TOPSPACE-diff))
         path.closePath()
         
@@ -309,7 +312,11 @@ class TabbarMenu: UIView{
 
 extension TabbarMenu: UICollectionViewDelegateFlowLayout {
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        return CGSizeMake(collectionView.frame.size.width, 75.375)
+        
+        // To make cells fit perfectly, we take the height of the filled path color of the menu
+        // which is screen height - TOPSPACE, and divide it by total # of cells (8)
+        
+        return CGSizeMake(collectionView.frame.size.width, 75.375) //
     }
 }
 
