@@ -23,7 +23,8 @@ class BLYFilterMenuCollectionCell: UICollectionViewCell {
         path.moveToPoint(CGPoint(x: 0, y: 0)) // top left corner
         path.addLineToPoint(CGPoint(x: self.frame.width, y: 0)) // top right corner
         path.addLineToPoint(CGPoint(x: self.frame.width, y: 0)) // Flat bottom line
-        path.addQuadCurveToPoint(CGPoint(x: 0, y: self.frame.height - TOPSPACE), controlPoint: CGPoint(x: self.frame.width/2, y: self.frame.height - TOPSPACE-diff))
+        path.addQuadCurveToPoint(CGPoint(x: 0, y: self.frame.height - TOPSPACE), controlPoint: CGPoint(x: self.frame.width/2, y: self.frame.height - TOPSPACE-diff/2.2)) // You had to divide to reduce the number,
+                                                                                                                                                                        // otherwise it stretched to far and was cut off by the next cell
         path.closePath()
         
         let context = UIGraphicsGetCurrentContext()
