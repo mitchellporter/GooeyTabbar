@@ -21,7 +21,6 @@
 		C3C325491C7FD9BD00C3F577 /* YALSpringAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = C3C325441C7FD9BD00C3F577 /* YALSpringAnimation.m */; };
 		C3C3254A1C7FD9BD00C3F577 /* YALAnimatingTabBarConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = C3C325461C7FD9BD00C3F577 /* YALAnimatingTabBarConstants.m */; };
 		C3C3254B1C7FD9BD00C3F577 /* CAAnimation+YALTabBarViewAnimations.m in Sources */ = {isa = PBXBuildFile; fileRef = C3C325481C7FD9BD00C3F577 /* CAAnimation+YALTabBarViewAnimations.m */; };
-		C3C3254F1C802D6900C3F577 /* BLYFloatingLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C3254E1C802D6900C3F577 /* BLYFloatingLayout.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,7 +66,6 @@
 		C3C325461C7FD9BD00C3F577 /* YALAnimatingTabBarConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YALAnimatingTabBarConstants.m; sourceTree = "<group>"; };
 		C3C325471C7FD9BD00C3F577 /* CAAnimation+YALTabBarViewAnimations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CAAnimation+YALTabBarViewAnimations.h"; sourceTree = "<group>"; };
 		C3C325481C7FD9BD00C3F577 /* CAAnimation+YALTabBarViewAnimations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CAAnimation+YALTabBarViewAnimations.m"; sourceTree = "<group>"; };
-		C3C3254E1C802D6900C3F577 /* BLYFloatingLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLYFloatingLayout.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,7 +134,6 @@
 				94E12C271BF97E8F00DA2010 /* LaunchScreen.storyboard */,
 				94E12C2A1BF97E8F00DA2010 /* Info.plist */,
 				C3C325421C7FD9BC00C3F577 /* GooeyTabbar-Bridging-Header.h */,
-				C3C3254E1C802D6900C3F577 /* BLYFloatingLayout.swift */,
 			);
 			path = GooeyTabbar;
 			sourceTree = "<group>";
@@ -294,7 +291,6 @@
 				94E12C211BF97E8F00DA2010 /* ViewController.swift in Sources */,
 				C3C3253E1C7FC9DA00C3F577 /* BLYFilterMenuCollectionCell.swift in Sources */,
 				94E12C1F1BF97E8F00DA2010 /* AppDelegate.swift in Sources */,
-				C3C3254F1C802D6900C3F577 /* BLYFloatingLayout.swift in Sources */,
 				94E12C4F1BF9FBA000DA2010 /* AnimatedButton.swift in Sources */,
 				C3C325491C7FD9BD00C3F577 /* YALSpringAnimation.m in Sources */,
 				94E12C4D1BF9A8E500DA2010 /* TabbarMenu.swift in Sources */,
