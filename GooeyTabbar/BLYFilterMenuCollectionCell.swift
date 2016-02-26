@@ -13,7 +13,7 @@ class BLYFilterMenuCollectionCell: UICollectionViewCell {
     @IBOutlet weak var iconImageView: UIImageView!
     @IBOutlet weak var label: UILabel!
     
-    let TOPSPACE : CGFloat = 14.0 //留白
+    let TOPSPACE : CGFloat = 75.375 //留白 // Increase the top space to decrease the height of the elastic effect at top of each cell
     var diff: CGFloat = 0.0
     var categoryColor: UIColor!
     
@@ -22,7 +22,7 @@ class BLYFilterMenuCollectionCell: UICollectionViewCell {
         let path = UIBezierPath()
         path.moveToPoint(CGPoint(x: 0, y: 0)) // top left corner
         path.addLineToPoint(CGPoint(x: self.frame.width, y: 0)) // top right corner
-        path.addLineToPoint(CGPoint(x: self.frame.width, y: self.frame.height - TOPSPACE))
+        path.addLineToPoint(CGPoint(x: self.frame.width, y: 0)) // Flat bottom line
         path.addQuadCurveToPoint(CGPoint(x: 0, y: self.frame.height - TOPSPACE), controlPoint: CGPoint(x: self.frame.width/2, y: self.frame.height - TOPSPACE-diff))
         path.closePath()
         

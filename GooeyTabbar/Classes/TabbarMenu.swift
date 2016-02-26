@@ -349,12 +349,20 @@ extension TabbarMenu: UICollectionViewDelegate, UICollectionViewDataSource {
         cell.iconImageView.image = UIImage(named: filterData["imageName"] as! String)
         cell.label!.text = filterData["name"] as? String
         cell.categoryColor = filterData["backgroundColor"] as? UIColor
+
         
         if indexPath.row == 7 {
             cell.backgroundColor = UIColor.clearColor()
         } else {
-            cell.backgroundColor = UIColor.greenColor() // TESTING
-//            cell.backgroundColor = cell.categoryColor
+//            cell.backgroundColor = UIColor.greenColor() // TESTING
+            cell.backgroundColor = cell.categoryColor
+        }
+        
+        if indexPath.row != 0 {
+            let previousFilterData = dataSource.filterDataForRow(indexPath.row-1)
+            cell.categoryColor = previousFilterData["backgroundColor"] as? UIColor
+        } else {
+            cell.categoryColor = filterData["backgroundColor"] as? UIColor
         }
         
         cells.append(cell)
