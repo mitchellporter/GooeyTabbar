@@ -92,7 +92,8 @@ class TabbarMenu: UIView{
         let path = UIBezierPath()
         path.moveToPoint(CGPoint(x: 0, y: 0)) // top left corner
         path.addLineToPoint(CGPoint(x: self.frame.width, y: 0)) // top right corner
-        path.addLineToPoint(CGPoint(x: self.frame.width, y: self.frame.height - TOPSPACE))
+        path.addLineToPoint(CGPoint(x: self.frame.width, y: self.frame.height - TOPSPACE)) // Bottom of entire view, notice how instead of filling the whole view it leaves clear space for the TOPSPACE
+
         path.addQuadCurveToPoint(CGPoint(x: 0, y: self.frame.height - TOPSPACE), controlPoint: CGPoint(x: self.frame.width/2, y: self.frame.height - TOPSPACE-diff))
         path.closePath()
         
@@ -158,16 +159,16 @@ class TabbarMenu: UIView{
         self.backgroundColor = UIColor.clearColor()
         keyWindow.addSubview(self)
         
-        // What are these different views for???
+        // Both rect views should be in the clear / top space area, closer to the color
         
         // BLUE
-        normalRect = UIView(frame: CGRect(x: 0, y: 50, width: 30, height: 30))
+        normalRect = UIView(frame: CGRect(x: 0, y: tabbarheight! + 10, width: 30, height: 30))
         normalRect.backgroundColor = UIColor.blueColor()
         normalRect.hidden = false
         keyWindow.addSubview(normalRect)
         
         // YELLOW
-        springRect = UIView(frame: CGRect(x: UIScreen.mainScreen().bounds.size.width/2 - 30/2, y: 50, width: 30, height: 30))
+        springRect = UIView(frame: CGRect(x: UIScreen.mainScreen().bounds.size.width/2 - 30/2, y: tabbarheight! + 10, width: 30, height: 30))
         springRect.backgroundColor = UIColor.yellowColor()
         springRect.hidden = false
         keyWindow.addSubview(springRect)
