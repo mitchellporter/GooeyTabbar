@@ -234,7 +234,6 @@ class TabbarMenu: UIView{
 
                     
                     // END OF DROP DOWN ANIMATION
-                    
                     UIView.animateWithDuration(0.3, delay: 0.2, options: .CurveEaseOut, animations: { () -> Void in
                         self.normalRect.center = CGPoint(x: self.normalRect.center.x, y: 567.0)
                         self.blurView.alpha = 1.0
