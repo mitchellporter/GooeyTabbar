@@ -18,8 +18,7 @@ class BLYFilterMenuCollectionCell: UICollectionViewCell {
     
     override func drawRect(rect: CGRect) {
         
-        print("cell drawRect")
-        
+        // Only add elastic animation for last cell, which will have a diff value set
         guard let diff = diff else {
             return
         }
