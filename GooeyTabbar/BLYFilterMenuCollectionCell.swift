@@ -19,6 +19,9 @@ class BLYFilterMenuCollectionCell: UICollectionViewCell {
     
     override func drawRect(rect: CGRect) {
         
+        layer.borderWidth = 2
+        layer.borderColor = categoryColor.CGColor
+        
         let path = UIBezierPath()
         path.moveToPoint(CGPoint(x: 0, y: 0)) // top left corner
         path.addLineToPoint(CGPoint(x: self.frame.width, y: 0)) // top right corner

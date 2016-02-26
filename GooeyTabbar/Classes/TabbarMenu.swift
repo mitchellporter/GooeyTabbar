@@ -350,14 +350,13 @@ extension TabbarMenu: UICollectionViewDelegate, UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("cell", forIndexPath: indexPath) as! BLYFilterMenuCollectionCell
         cell.iconImageView.image = UIImage(named: filterData["imageName"] as! String)
         cell.label!.text = filterData["name"] as? String
-        cell.categoryColor = filterData["backgroundColor"] as? UIColor
 
         
         if indexPath.row == 7 {
             cell.backgroundColor = UIColor.clearColor()
         } else {
 //            cell.backgroundColor = UIColor.greenColor() // TESTING
-            cell.backgroundColor = cell.categoryColor
+            cell.backgroundColor = filterData["backgroundColor"] as? UIColor
         }
         
         if indexPath.row != 0 {
