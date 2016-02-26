@@ -176,7 +176,7 @@ class TabbarMenu: UIView{
         
         
         // Add the collection view
-        self.addSubview(collectionView)
+//        self.addSubview(collectionView)
 
         
         // At bottom of entire view, then minus top space (clear),
@@ -248,6 +248,8 @@ class TabbarMenu: UIView{
             opened = false
             startAnimation()
             
+            // inward, outward, normal
+            
             // START OF BACK UP ANIMATION
             // This is the animation where entire view goes back up
             UIView.animateWithDuration(0.3, delay: 0.0, options: .CurveEaseOut, animations: { () -> Void in
@@ -255,18 +257,18 @@ class TabbarMenu: UIView{
                 }, completion: nil)
             
             UIView.animateWithDuration(0.3, delay: 0.0, options: .CurveEaseOut, animations: { () -> Void in
-                self.normalRect.center = CGPoint(x: self.normalRect.center.x, y: 100.0)
+                self.normalRect.center = CGPoint(x: self.normalRect.center.x, y: 50.0)
                 self.blurView.alpha = 0.0
                 }, completion: nil)
             
             UIView.animateWithDuration(0.2, delay:0.0, options: .CurveEaseOut, animations: { () -> Void in
-                self.springRect.center = CGPoint(x: self.springRect.center.x, y: 110.0)
+                self.springRect.center = CGPoint(x: self.springRect.center.x, y: 20.0) // Inward
                 }, completion: { (finish) -> Void in
                     UIView.animateWithDuration(0.2, delay: 0.0, options: .CurveEaseOut, animations: { () -> Void in
-                        self.springRect.center = CGPoint(x: self.springRect.center.x, y: 60.0)
+                        self.springRect.center = CGPoint(x: self.springRect.center.x, y: 60.0) // Outward
                         }, completion: { (finish) -> Void in
                             UIView.animateWithDuration(0.2, delay: 0.0, options: .CurveEaseOut, animations: { () -> Void in
-                                self.springRect.center = CGPoint(x: self.springRect.center.x, y: 100)
+                                self.springRect.center = CGPoint(x: self.springRect.center.x, y: 50.0) // Normal
                                 }, completion: { (finish) -> Void in
                                     self.finishAnimation()
                             })
@@ -284,12 +286,12 @@ class TabbarMenu: UIView{
         let normalRectFrame = normalRectLayer!.valueForKey("frame")!.CGRectValue
         let springRectFrame = springRectLayer!.valueForKey("frame")!.CGRectValue
         
-        lastCell.diff = normalRectFrame.origin.y - springRectFrame.origin.y
+//        lastCell.diff = normalRectFrame.origin.y - springRectFrame.origin.y
         diff = normalRectFrame.origin.y - springRectFrame.origin.y
         
 //        print("=====\(diff)")
         
-        lastCell.setNeedsDisplay()
+//        lastCell.setNeedsDisplay()
         self.setNeedsDisplay()
     }
     
