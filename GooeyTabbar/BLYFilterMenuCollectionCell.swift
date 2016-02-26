@@ -14,14 +14,15 @@ class BLYFilterMenuCollectionCell: UICollectionViewCell {
     @IBOutlet weak var label: UILabel!
     
     let TOPSPACE : CGFloat = 14.0 //留白
-    var diff: CGFloat?
+    var diff: CGFloat = 0.0
+    var categoryColor: UIColor!
     
     override func drawRect(rect: CGRect) {
         
         // Only add elastic animation for last cell, which will have a diff value set
-        guard let diff = diff else {
-            return
-        }
+//        guard let diff = diff else {
+//            return
+//        }
         
         let path = UIBezierPath()
         path.moveToPoint(CGPoint(x: 0, y: 0)) // top left corner
@@ -33,7 +34,8 @@ class BLYFilterMenuCollectionCell: UICollectionViewCell {
         let context = UIGraphicsGetCurrentContext()
         CGContextAddPath(context, path.CGPath)
         UIColor.greenColor().set()
-        UIColor(red:0.863,  green:0.318,  blue:0.604, alpha:1).set() // Pink
+        categoryColor.set()
+//        UIColor(red:0.863,  green:0.318,  blue:0.604, alpha:1).set() // Pink
         //        UIColor(red:0.945,  green:0.800,  blue:0.012, alpha:1).set() // Yellow
         CGContextFillPath(context)
     }

@@ -42,6 +42,8 @@ class TabbarMenu: UIView{
     let TOPSPACE : CGFloat = 64.0 //留白
     private var tabbarheight : CGFloat? //tabbar高度
     
+    var cells = [BLYFilterMenuCollectionCell]()
+    
     init(tabbarHeight : CGFloat)
     {
         tabbarheight = tabbarHeight
@@ -176,7 +178,7 @@ class TabbarMenu: UIView{
         
         
         // Add the collection view
-//        self.addSubview(collectionView)
+        self.addSubview(collectionView)
 
         
         // At bottom of entire view, then minus top space (clear),
@@ -214,14 +216,14 @@ class TabbarMenu: UIView{
             
             // 1. First animation moves the springRect view up by 40. This created the initial pull and arch.
             
-            UIView.animateWithDuration(0.3, delay: 0.0, options: .CurveEaseOut, animations: { () -> Void in
+            UIView.animateWithDuration(5.3, delay: 0.0, options: .CurveEaseOut, animations: { () -> Void in
                 self.springRect.center = CGPoint(x: self.springRect.center.x, y: self.springRect.center.y + 40)
                 }) { (finish) -> Void in
                     
                     // START OF DROP DOWN ANIMATION
                     // This is the animation where entire view drops
                     // Time collision animation / effects on icons with this one
-                    UIView.animateWithDuration(0.3, delay: 0.0, options: .CurveEaseOut, animations: { () -> Void in
+                    UIView.animateWithDuration(5.3, delay: 0.0, options: .CurveEaseOut, animations: { () -> Void in
                         self.frame = self.terminalFrame!
                         }, completion: { (finish) -> Void in
 //                            self.spinIconsAnimation()
@@ -230,12 +232,12 @@ class TabbarMenu: UIView{
                     
                     // END OF DROP DOWN ANIMATION
                     
-                    UIView.animateWithDuration(0.3, delay: 0.2, options: .CurveEaseOut, animations: { () -> Void in
+                    UIView.animateWithDuration(5.3, delay: 0.2, options: .CurveEaseOut, animations: { () -> Void in
                         self.normalRect.center = CGPoint(x: self.normalRect.center.x, y: 567.0)
                         self.blurView.alpha = 1.0
                         }, completion: nil)
                     
-                    UIView.animateWithDuration(1.0, delay: 0.2, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.0, options: .CurveEaseOut, animations: { () -> Void in
+                    UIView.animateWithDuration(5.0, delay: 0.2, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.0, options: .CurveEaseOut, animations: { () -> Void in
                         self.springRect.center = CGPoint(x: self.springRect.center.x, y: 567.0)
                         }, completion: { (finish) -> Void in
                             self.finishAnimation()
@@ -248,7 +250,6 @@ class TabbarMenu: UIView{
             opened = false
             startAnimation()
             
-            // inward, outward, normal
             
             // START OF BACK UP ANIMATION
             // This is the animation where entire view goes back up
@@ -261,6 +262,7 @@ class TabbarMenu: UIView{
                 self.blurView.alpha = 0.0
                 }, completion: nil)
             
+            // inward, outward, normal
             UIView.animateWithDuration(0.2, delay:0.0, options: .CurveEaseOut, animations: { () -> Void in
                 self.springRect.center = CGPoint(x: self.springRect.center.x, y: 20.0) // Inward
                 }, completion: { (finish) -> Void in
@@ -286,12 +288,14 @@ class TabbarMenu: UIView{
         let normalRectFrame = normalRectLayer!.valueForKey("frame")!.CGRectValue
         let springRectFrame = springRectLayer!.valueForKey("frame")!.CGRectValue
         
-//        lastCell.diff = normalRectFrame.origin.y - springRectFrame.origin.y
+        
+        for cell in cells {
+            cell.diff = diff
+            cell.setNeedsDisplay()
+        }
         diff = normalRectFrame.origin.y - springRectFrame.origin.y
         
 //        print("=====\(diff)")
-        
-//        lastCell.setNeedsDisplay()
         self.setNeedsDisplay()
     }
     
@@ -344,14 +348,10 @@ extension TabbarMenu: UICollectionViewDelegate, UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("cell", forIndexPath: indexPath) as! BLYFilterMenuCollectionCell
         cell.iconImageView.image = UIImage(named: filterData["imageName"] as! String)
         cell.label!.text = filterData["name"] as? String
+        cell.backgroundColor = UIColor.clearColor()
+        cell.categoryColor = filterData["backgroundColor"] as? UIColor
         
-        if indexPath.row == 7 {
-            lastCell = cell
-            cell.backgroundColor = UIColor.clearColor()
-        } else {
-            cell.backgroundColor = filterData["backgroundColor"] as? UIColor
-        }
-        
+        cells.append(cell)
         return cell
     }
     
