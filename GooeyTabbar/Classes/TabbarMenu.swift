@@ -110,13 +110,22 @@ class TabbarMenu: UIView{
         collectionView.registerNib(UINib(nibName: "BLYFilterMenuCollectionCell", bundle: nil), forCellWithReuseIdentifier: "cell")
         collectionView.delegate = self
         collectionView.dataSource = self
+        collectionView.addObserver(self, forKeyPath: "contentSize", options: [], context: nil)
         
         // Style
         collectionView.backgroundColor = UIColor.clearColor()
         flowLayout.minimumLineSpacing = 0.0
         flowLayout.minimumInteritemSpacing = 0.0
         
-        collectionViewBackgroundHack()
+//        collectionViewBackgroundHack()
+    }
+    
+    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+        dispatch_async(dispatch_get_main_queue()) { () -> Void in
+            var frame = self.collectionView.frame
+            frame.size.height = self.collectionView.contentSize.height
+            self.collectionView.frame = frame
+        }
     }
     
     func collectionViewBackgroundHack() {
@@ -141,7 +150,13 @@ class TabbarMenu: UIView{
 //        collectionViewFrame.origin.y -= CGFloat(68)
 //        collectionViewFrame.size.height += CGFloat(68)
 //        collectionView.frame = collectionViewFrame
-    }
+        
+//        dispatch_async(dispatch_get_main_queue()) { () -> Void in
+//            var frame = self.collectionView.frame
+//            frame.size.height = self.collectionView.contentSize.height
+//            self.collectionView.frame = frame
+//        }
+}
     
     func setUpViews()
     {
@@ -331,7 +346,7 @@ extension TabbarMenu: UICollectionViewDelegateFlowLayout {
         // To make cells fit perfectly, we take the height of the filled path color of the menu
         // which is frame height - TOPSPACE, and divide it by total # of cells (8) eg. iPhone 6 size: 75.375
         // (self.frame.height - TOPSPACE) / 8)
-        return CGSizeMake(collectionView.frame.size.width, (self.frame.height - TOPSPACE) / 8)
+        return CGSizeMake(collectionView.frame.size.width, tabbarheight!)
     }
 }
 
