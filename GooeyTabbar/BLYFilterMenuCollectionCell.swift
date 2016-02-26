@@ -19,11 +19,6 @@ class BLYFilterMenuCollectionCell: UICollectionViewCell {
     
     override func drawRect(rect: CGRect) {
         
-        // Only add elastic animation for last cell, which will have a diff value set
-//        guard let diff = diff else {
-//            return
-//        }
-        
         let path = UIBezierPath()
         path.moveToPoint(CGPoint(x: 0, y: 0)) // top left corner
         path.addLineToPoint(CGPoint(x: self.frame.width, y: 0)) // top right corner

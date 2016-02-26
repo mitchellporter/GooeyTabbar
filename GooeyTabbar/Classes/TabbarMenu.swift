@@ -22,7 +22,7 @@ class TabbarMenu: UIView{
     /// 是否打开
     var opened : Bool = false
     var collectionView: UICollectionView!
-    var flowLayout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+    var flowLayout = UICollectionViewFlowLayout()
     var dataSource: TabbarMenuDataSource!
     var delegate: TabbarMenuDelegate!
     
@@ -223,7 +223,7 @@ class TabbarMenu: UIView{
                     // START OF DROP DOWN ANIMATION
                     // This is the animation where entire view drops
                     // Time collision animation / effects on icons with this one
-                    UIView.animateWithDuration(0.3, delay: 0.0, options: .CurveEaseOut, animations: { () -> Void in
+                    UIView.animateWithDuration(5.3, delay: 0.0, options: .CurveEaseOut, animations: { () -> Void in
                         self.frame = self.terminalFrame!
                         }, completion: { (finish) -> Void in
 //                            self.spinIconsAnimation()
@@ -232,12 +232,12 @@ class TabbarMenu: UIView{
                     
                     // END OF DROP DOWN ANIMATION
                     
-                    UIView.animateWithDuration(0.3, delay: 0.2, options: .CurveEaseOut, animations: { () -> Void in
+                    UIView.animateWithDuration(5.3, delay: 0.2, options: .CurveEaseOut, animations: { () -> Void in
                         self.normalRect.center = CGPoint(x: self.normalRect.center.x, y: 567.0)
                         self.blurView.alpha = 1.0
                         }, completion: nil)
                     
-                    UIView.animateWithDuration(1.0, delay: 0.2, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.0, options: .CurveEaseOut, animations: { () -> Void in
+                    UIView.animateWithDuration(5.0, delay: 0.2, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.0, options: .CurveEaseOut, animations: { () -> Void in
                         self.springRect.center = CGPoint(x: self.springRect.center.x, y: 567.0)
                         }, completion: { (finish) -> Void in
                             self.finishAnimation()
@@ -329,7 +329,7 @@ extension TabbarMenu: UICollectionViewDelegateFlowLayout {
         // To make cells fit perfectly, we take the height of the filled path color of the menu
         // which is screen height - TOPSPACE, and divide it by total # of cells (8)
         
-        return CGSizeMake(collectionView.frame.size.width, 75.375) //
+        return CGSizeMake(collectionView.frame.size.width, 75.375)
     }
 }
 
@@ -353,7 +353,8 @@ extension TabbarMenu: UICollectionViewDelegate, UICollectionViewDataSource {
         if indexPath.row == 7 {
             cell.backgroundColor = UIColor.clearColor()
         } else {
-            cell.backgroundColor = UIColor.greenColor()
+            cell.backgroundColor = UIColor.greenColor() // TESTING
+//            cell.backgroundColor = cell.categoryColor
         }
         
         cells.append(cell)
