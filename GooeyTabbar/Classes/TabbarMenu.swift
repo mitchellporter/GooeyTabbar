@@ -216,14 +216,14 @@ class TabbarMenu: UIView{
             
             // 1. First animation moves the springRect view up by 40. This created the initial pull and arch.
             
-            UIView.animateWithDuration(5.3, delay: 0.0, options: .CurveEaseOut, animations: { () -> Void in
+            UIView.animateWithDuration(0.3, delay: 0.0, options: .CurveEaseOut, animations: { () -> Void in
                 self.springRect.center = CGPoint(x: self.springRect.center.x, y: self.springRect.center.y + 40)
                 }) { (finish) -> Void in
                     
                     // START OF DROP DOWN ANIMATION
                     // This is the animation where entire view drops
                     // Time collision animation / effects on icons with this one
-                    UIView.animateWithDuration(5.3, delay: 0.0, options: .CurveEaseOut, animations: { () -> Void in
+                    UIView.animateWithDuration(0.3, delay: 0.0, options: .CurveEaseOut, animations: { () -> Void in
                         self.frame = self.terminalFrame!
                         }, completion: { (finish) -> Void in
 //                            self.spinIconsAnimation()
@@ -232,12 +232,12 @@ class TabbarMenu: UIView{
                     
                     // END OF DROP DOWN ANIMATION
                     
-                    UIView.animateWithDuration(5.3, delay: 0.2, options: .CurveEaseOut, animations: { () -> Void in
+                    UIView.animateWithDuration(0.3, delay: 0.2, options: .CurveEaseOut, animations: { () -> Void in
                         self.normalRect.center = CGPoint(x: self.normalRect.center.x, y: 567.0)
                         self.blurView.alpha = 1.0
                         }, completion: nil)
                     
-                    UIView.animateWithDuration(5.0, delay: 0.2, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.0, options: .CurveEaseOut, animations: { () -> Void in
+                    UIView.animateWithDuration(1.0, delay: 0.2, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.0, options: .CurveEaseOut, animations: { () -> Void in
                         self.springRect.center = CGPoint(x: self.springRect.center.x, y: 567.0)
                         }, completion: { (finish) -> Void in
                             self.finishAnimation()
@@ -348,8 +348,13 @@ extension TabbarMenu: UICollectionViewDelegate, UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("cell", forIndexPath: indexPath) as! BLYFilterMenuCollectionCell
         cell.iconImageView.image = UIImage(named: filterData["imageName"] as! String)
         cell.label!.text = filterData["name"] as? String
-        cell.backgroundColor = UIColor.clearColor()
         cell.categoryColor = filterData["backgroundColor"] as? UIColor
+        
+        if indexPath.row == 7 {
+            cell.backgroundColor = UIColor.clearColor()
+        } else {
+            cell.backgroundColor = UIColor.greenColor()
+        }
         
         cells.append(cell)
         return cell
