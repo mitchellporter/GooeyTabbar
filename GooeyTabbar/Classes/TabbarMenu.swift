@@ -156,16 +156,23 @@ class TabbarMenu: UIView{
         // What are these different views for???
         
         // BLUE
-        normalRect = UIView(frame: CGRect(x: 0, y: (self.frame.origin.y + self.frame.height) - (30 + 10), width: 30, height: 30))
+        normalRect = UIView(frame: CGRect(x: 0, y: 50, width: 30, height: 30))
         normalRect.backgroundColor = UIColor.blueColor()
         normalRect.hidden = false
         keyWindow.addSubview(normalRect)
         
         // YELLOW
-        springRect = UIView(frame: CGRect(x: UIScreen.mainScreen().bounds.size.width/2 - 30/2, y: normalRect.frame.origin.y, width: 30, height: 30))
+        springRect = UIView(frame: CGRect(x: UIScreen.mainScreen().bounds.size.width/2 - 30/2, y: 50, width: 30, height: 30))
         springRect.backgroundColor = UIColor.yellowColor()
         springRect.hidden = false
         keyWindow.addSubview(springRect)
+        
+//        print(normalRect.center.y)
+//        print(springRect.center.y)
+//        
+//        print(normalRect.frame.origin.y)
+//        print(springRect.frame.origin.y)
+
         
         
         // Add the collection view
@@ -174,7 +181,6 @@ class TabbarMenu: UIView{
         
         // At bottom of entire view, then minus top space (clear),
         animateButton = AnimatedButton(frame: CGRect(x: 0, y: terminalFrame!.height - TOPSPACE - tabbarheight!, width: 50, height: 30))
-        //    animateButton = AnimatedButton(frame: CGRect(x: 0, y: (terminalFrame!.height - TOPSPACE) - (tabbarheight! - 30), width: 50, height: 30))
         self.addSubview(animateButton!)
         animateButton!.didTapped = { (button) -> () in
             self.triggerAction()
@@ -225,12 +231,12 @@ class TabbarMenu: UIView{
                     // END OF DROP DOWN ANIMATION
                     
                     UIView.animateWithDuration(0.3, delay: 0.2, options: .CurveEaseOut, animations: { () -> Void in
-                        self.normalRect.center = CGPoint(x: self.normalRect.center.x, y: 100)
+                        self.normalRect.center = CGPoint(x: self.normalRect.center.x, y: 567.0)
                         self.blurView.alpha = 1.0
                         }, completion: nil)
                     
                     UIView.animateWithDuration(1.0, delay: 0.2, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.0, options: .CurveEaseOut, animations: { () -> Void in
-                        self.springRect.center = CGPoint(x: self.springRect.center.x, y: 100)
+                        self.springRect.center = CGPoint(x: self.springRect.center.x, y: 567.0)
                         }, completion: { (finish) -> Void in
                             self.finishAnimation()
                     })
@@ -249,18 +255,18 @@ class TabbarMenu: UIView{
                 }, completion: nil)
             
             UIView.animateWithDuration(0.3, delay: 0.0, options: .CurveEaseOut, animations: { () -> Void in
-                self.normalRect.center = CGPoint(x: self.normalRect.center.x, y: UIScreen.mainScreen().bounds.size.height - 30 - 50)
+                self.normalRect.center = CGPoint(x: self.normalRect.center.x, y: 100.0)
                 self.blurView.alpha = 0.0
                 }, completion: nil)
             
             UIView.animateWithDuration(0.2, delay:0.0, options: .CurveEaseOut, animations: { () -> Void in
-                self.springRect.center = CGPoint(x: self.springRect.center.x, y: UIScreen.mainScreen().bounds.size.height - 30 - 50 + 10)
+                self.springRect.center = CGPoint(x: self.springRect.center.x, y: 110.0)
                 }, completion: { (finish) -> Void in
                     UIView.animateWithDuration(0.2, delay: 0.0, options: .CurveEaseOut, animations: { () -> Void in
-                        self.springRect.center = CGPoint(x: self.springRect.center.x, y: UIScreen.mainScreen().bounds.size.height - 30 - 50 - 40)
+                        self.springRect.center = CGPoint(x: self.springRect.center.x, y: 60.0)
                         }, completion: { (finish) -> Void in
                             UIView.animateWithDuration(0.2, delay: 0.0, options: .CurveEaseOut, animations: { () -> Void in
-                                self.springRect.center = CGPoint(x: self.springRect.center.x, y: UIScreen.mainScreen().bounds.size.height - 30 - 50)
+                                self.springRect.center = CGPoint(x: self.springRect.center.x, y: 100)
                                 }, completion: { (finish) -> Void in
                                     self.finishAnimation()
                             })
@@ -299,6 +305,9 @@ class TabbarMenu: UIView{
     
     private func finishAnimation()
     {
+        
+//        print(springRect.center.y)
+        
         animationCount--
         if animationCount == 0
         {
