@@ -122,9 +122,18 @@ class TabbarMenu: UIView{
     
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
         dispatch_async(dispatch_get_main_queue()) { () -> Void in
+            
+            // Fit collectionview to match cell content size
             var frame = self.collectionView.frame
             frame.size.height = self.collectionView.contentSize.height
             self.collectionView.frame = frame
+            
+            // Size self to match collection view
+            self.frame = CGRectMake(self.frame.origin.x, -self.collectionView.frame.size.height + self.tabbarheight! + self.TOPSPACE, self.collectionView.frame.size.width, self.collectionView.frame.size.height)
+            
+            self.setNeedsDisplay()
+            // Setup the views
+//            self.setUpViews()
         }
     }
     
