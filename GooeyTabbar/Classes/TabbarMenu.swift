@@ -96,8 +96,6 @@ class TabbarMenu: UIView{
         path.addLineToPoint(CGPoint(x: self.frame.width, y: 0)) // top right corner
         path.addLineToPoint(CGPoint(x: self.frame.width, y: self.frame.height - TOPSPACE)) // Bottom of entire view, notice how instead of filling the whole view it leaves clear space for the TOPSPACE
         
-        print(self.frame.width)
-
         path.addQuadCurveToPoint(CGPoint(x: 0, y: self.frame.height - TOPSPACE), controlPoint: CGPoint(x: self.frame.width/2, y: self.frame.height - TOPSPACE-diff))
         path.closePath()
         
@@ -110,7 +108,6 @@ class TabbarMenu: UIView{
     
     func setupCollectionView() {
         
-        print(bounds.size.width)
         collectionView = UICollectionView(frame: CGRectMake(0, 0, bounds.size.width, self.frame.height - TOPSPACE), collectionViewLayout: flowLayout)
         collectionView.registerNib(UINib(nibName: "BLYFilterMenuCollectionCell", bundle: nil), forCellWithReuseIdentifier: "cell")
         collectionView.delegate = self
@@ -125,7 +122,6 @@ class TabbarMenu: UIView{
         // Add the collection view
         self.addSubview(collectionView)
         
-//        collectionViewBackgroundHack()
     }
     
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
@@ -139,7 +135,6 @@ class TabbarMenu: UIView{
             // Size self to match collection view
             self.frame = CGRectMake(self.frame.origin.x, -frame.height + self.tabbarheight!, UIScreen.mainScreen().bounds.size.width, self.collectionView.frame.size.height + self.TOPSPACE)
             
-            
             // Setup the views
             if !self.setupViewsTracker {
             self.setupViewsTracker = true
@@ -147,7 +142,6 @@ class TabbarMenu: UIView{
             }
             
             self.setNeedsDisplay()
-            
         }
     }
     
@@ -213,13 +207,7 @@ class TabbarMenu: UIView{
         springRect.backgroundColor = UIColor.yellowColor()
         springRect.hidden = false
         keyWindow.addSubview(springRect)
-        
-//        print(normalRect.center.y)
-//        print(springRect.center.y)
-//        
-//        print(normalRect.frame.origin.y)
-//        print(springRect.frame.origin.y)
-
+    
         // At bottom of entire view, then minus top space (clear),
         animateButton = AnimatedButton(frame: CGRect(x: 0, y: self.frame.height - TOPSPACE - ((tabbarheight! + 30)/2), width: 50, height: 30))
         self.addSubview(animateButton!)
@@ -261,8 +249,11 @@ class TabbarMenu: UIView{
                     // START OF DROP DOWN ANIMATION
                     // This is the animation where entire view drops
                     // Time collision animation / effects on icons with this one
+                    print(self.frame)
+                    print(self.terminalFrame)
+                    
                     UIView.animateWithDuration(0.3, delay: 0.0, options: .CurveEaseOut, animations: { () -> Void in
-                        self.frame = self.terminalFrame!
+                        self.frame = CGRectMake(self.frame.origin.x, self.terminalFrame!.origin.y, self.frame.size.width, self.frame.size.height)
                         }, completion: { (finish) -> Void in
                     })
 
