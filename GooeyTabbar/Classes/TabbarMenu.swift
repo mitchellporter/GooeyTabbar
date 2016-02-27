@@ -262,12 +262,12 @@ class TabbarMenu: UIView{
                     // END OF DROP DOWN ANIMATION
                     
                     UIView.animateWithDuration(0.3, delay: 0.2, options: .CurveEaseOut, animations: { () -> Void in
-                        self.normalRect.frame = CGRectMake(self.normalRect.frame.origin.x, self.frame.size.height - (self.normalRect.frame.size.height * 2) - self.tabbarheight! - 10, self.normalRect.frame.size.width, self.normalRect.frame.size.height)
+                        self.normalRect.frame = CGRectMake(self.normalRect.frame.origin.x, self.frame.size.height - (self.normalRect.frame.size.height * 1.8) - self.tabbarheight!, self.normalRect.frame.size.width, self.normalRect.frame.size.height)
                         self.blurView.alpha = 1.0
                         }, completion: nil)
                     
                     UIView.animateWithDuration(1.0, delay: 0.2, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.0, options: .CurveEaseOut, animations: { () -> Void in
-                        self.springRect.frame = CGRectMake(self.springRect.frame.origin.x, self.frame.size.height - (self.springRect.frame.size.height * 2) - self.tabbarheight! - 10, self.springRect.frame.size.width, self.springRect.frame.size.height)
+                        self.springRect.frame = CGRectMake(self.springRect.frame.origin.x, self.frame.size.height - (self.springRect.frame.size.height * 1.8) - self.tabbarheight!, self.springRect.frame.size.width, self.springRect.frame.size.height)
                         }, completion: { (finish) -> Void in
                             self.finishAnimation()
                     })
@@ -287,19 +287,19 @@ class TabbarMenu: UIView{
                 }, completion: nil)
             
             UIView.animateWithDuration(0.3, delay: 0.0, options: .CurveEaseOut, animations: { () -> Void in
-                self.normalRect.center = CGPoint(x: self.normalRect.center.x, y: 85.0) // OG: 50
+                self.normalRect.center = CGPoint(x: self.normalRect.center.x, y: 110.0) // OG: 50
                 self.blurView.alpha = 0.0
                 }, completion: nil)
             
             // inward, outward, normal
             UIView.animateWithDuration(0.2, delay:0.0, options: .CurveEaseOut, animations: { () -> Void in
-                self.springRect.center = CGPoint(x: self.springRect.center.x, y: 55.0) // Inward - 30
+                self.springRect.center = CGPoint(x: self.springRect.center.x, y: 80.0) // Inward - 30
                 }, completion: { (finish) -> Void in
                     UIView.animateWithDuration(0.2, delay: 0.0, options: .CurveEaseOut, animations: { () -> Void in
-                        self.springRect.center = CGPoint(x: self.springRect.center.x, y: 95.0) // Outward + 10
+                        self.springRect.center = CGPoint(x: self.springRect.center.x, y: 120.0) // Outward + 10
                         }, completion: { (finish) -> Void in
                             UIView.animateWithDuration(0.2, delay: 0.0, options: .CurveEaseOut, animations: { () -> Void in
-                                self.springRect.center = CGPoint(x: self.springRect.center.x, y: 85.0) // Normal - equals
+                                self.springRect.center = CGPoint(x: self.springRect.center.x, y: 110.0) // Normal - equals
                                 }, completion: { (finish) -> Void in
                                     self.finishAnimation()
                             })
