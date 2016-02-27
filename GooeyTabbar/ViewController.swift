@@ -89,7 +89,8 @@ class ViewController: UIViewController {
     menu.dataSource = self
     menu.delegate = self
     menu.setupCollectionView()
-    menu.setUpViews()
+//    menu.setUpViews()
+    menu.setupKeyWindow()
   }
   
     override func prefersStatusBarHidden() -> Bool {

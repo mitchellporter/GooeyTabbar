@@ -27,6 +27,8 @@ class TabbarMenu: UIView{
     var delegate: TabbarMenuDelegate!
     
     var lastCell: BLYFilterMenuCollectionCell!
+    
+    var setupViewsTracker = Bool()
 
     private var normalRect : UIView!
     private var springRect : UIView!
@@ -93,6 +95,8 @@ class TabbarMenu: UIView{
         path.moveToPoint(CGPoint(x: 0, y: 0)) // top left corner
         path.addLineToPoint(CGPoint(x: self.frame.width, y: 0)) // top right corner
         path.addLineToPoint(CGPoint(x: self.frame.width, y: self.frame.height - TOPSPACE)) // Bottom of entire view, notice how instead of filling the whole view it leaves clear space for the TOPSPACE
+        
+        print(self.frame.width)
 
         path.addQuadCurveToPoint(CGPoint(x: 0, y: self.frame.height - TOPSPACE), controlPoint: CGPoint(x: self.frame.width/2, y: self.frame.height - TOPSPACE-diff))
         path.closePath()
@@ -106,6 +110,7 @@ class TabbarMenu: UIView{
     
     func setupCollectionView() {
         
+        print(bounds.size.width)
         collectionView = UICollectionView(frame: CGRectMake(0, 0, bounds.size.width, self.frame.height - TOPSPACE), collectionViewLayout: flowLayout)
         collectionView.registerNib(UINib(nibName: "BLYFilterMenuCollectionCell", bundle: nil), forCellWithReuseIdentifier: "cell")
         collectionView.delegate = self
@@ -117,6 +122,9 @@ class TabbarMenu: UIView{
         flowLayout.minimumLineSpacing = 0.0
         flowLayout.minimumInteritemSpacing = 0.0
         
+        // Add the collection view
+        self.addSubview(collectionView)
+        
 //        collectionViewBackgroundHack()
     }
     
@@ -126,14 +134,20 @@ class TabbarMenu: UIView{
             // Fit collectionview to match cell content size
             var frame = self.collectionView.frame
             frame.size.height = self.collectionView.contentSize.height
-            self.collectionView.frame = frame
+            self.collectionView.frame = CGRectMake(frame.origin.x, 0, frame.size.width, frame.size.height)
             
             // Size self to match collection view
-            self.frame = CGRectMake(self.frame.origin.x, -self.collectionView.frame.size.height + self.tabbarheight! + self.TOPSPACE, self.collectionView.frame.size.width, self.collectionView.frame.size.height)
+            self.frame = CGRectMake(self.frame.origin.x, -frame.height + self.tabbarheight!, UIScreen.mainScreen().bounds.size.width, self.collectionView.frame.size.height + self.TOPSPACE)
+            
+            
+            // Setup the views
+            if !self.setupViewsTracker {
+            self.setupViewsTracker = true
+            self.setUpViews()
+            }
             
             self.setNeedsDisplay()
-            // Setup the views
-//            self.setUpViews()
+            
         }
     }
     
@@ -167,9 +181,8 @@ class TabbarMenu: UIView{
 //        }
 }
     
-    func setUpViews()
-    {
-
+    func setupKeyWindow() {
+        
         self.clipsToBounds = true
         self.layer.masksToBounds = true
         
@@ -182,6 +195,10 @@ class TabbarMenu: UIView{
         
         self.backgroundColor = UIColor.clearColor()
         keyWindow.addSubview(self)
+    }
+    
+    func setUpViews()
+    {
         
         // Both rect views should be in the clear / top space area, closer to the color
         
@@ -203,20 +220,13 @@ class TabbarMenu: UIView{
 //        print(normalRect.frame.origin.y)
 //        print(springRect.frame.origin.y)
 
-        
-        
-        // Add the collection view
-        self.addSubview(collectionView)
-
-        
         // At bottom of entire view, then minus top space (clear),
         animateButton = AnimatedButton(frame: CGRect(x: 0, y: self.frame.height - TOPSPACE - ((tabbarheight! + 30)/2), width: 50, height: 30))
         self.addSubview(animateButton!)
         animateButton!.didTapped = { (button) -> () in
             self.triggerAction()
         }
-        
-       
+
         }
     
     func spinIconsAnimation() {
