@@ -85,7 +85,7 @@ class ViewController: UIViewController {
   
   override func viewDidAppear(animated: Bool) {
 //    print((UIScreen.mainScreen().bounds.size.height - TOPSPACE) / 8)
-    menu = TabbarMenu(tabbarHeight: 44.0) // Original value was 40.0
+    menu = TabbarMenu(tabbarHeight: 64.0) // Original value was 40.0
     menu.dataSource = self
     menu.delegate = self
     menu.setupCollectionView()
