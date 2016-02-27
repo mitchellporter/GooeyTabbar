@@ -246,7 +246,7 @@ class TabbarMenu: UIView{
             
             // 1. First animation moves the springRect view up by 40. This created the initial pull and arch.
             
-            UIView.animateWithDuration(0.3, delay: 0.0, options: .CurveEaseOut, animations: { () -> Void in
+            UIView.animateWithDuration(5.3, delay: 0.0, options: .CurveEaseOut, animations: { () -> Void in
                 self.springRect.center = CGPoint(x: self.springRect.center.x, y: self.springRect.center.y + 40)
                 }) { (finish) -> Void in
                     
@@ -254,19 +254,19 @@ class TabbarMenu: UIView{
                     // This is the animation where entire view drops
                     // Time collision animation / effects on icons with this one
                     
-                    UIView.animateWithDuration(0.3, delay: 0.0, options: .CurveEaseOut, animations: { () -> Void in
+                    UIView.animateWithDuration(5.3, delay: 0.0, options: .CurveEaseOut, animations: { () -> Void in
                         self.frame = CGRectMake(self.frame.origin.x, self.terminalFrame!.origin.y, self.frame.size.width, self.frame.size.height)
                         }, completion: { (finish) -> Void in
                     })
 
                     // END OF DROP DOWN ANIMATION
                     
-                    UIView.animateWithDuration(0.3, delay: 0.2, options: .CurveEaseOut, animations: { () -> Void in
+                    UIView.animateWithDuration(5.3, delay: 0.2, options: .CurveEaseOut, animations: { () -> Void in
                         self.normalRect.frame = CGRectMake(self.normalRect.frame.origin.x, self.frame.size.height - (self.normalRect.frame.size.height * 2) - self.tabbarheight! - 10, self.normalRect.frame.size.width, self.normalRect.frame.size.height)
                         self.blurView.alpha = 1.0
                         }, completion: nil)
                     
-                    UIView.animateWithDuration(1.0, delay: 0.2, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.0, options: .CurveEaseOut, animations: { () -> Void in
+                    UIView.animateWithDuration(5.0, delay: 0.2, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.0, options: .CurveEaseOut, animations: { () -> Void in
                         self.springRect.frame = CGRectMake(self.springRect.frame.origin.x, self.frame.size.height - (self.springRect.frame.size.height * 2) - self.tabbarheight! - 10, self.springRect.frame.size.width, self.springRect.frame.size.height)
                         }, completion: { (finish) -> Void in
                             self.finishAnimation()
@@ -287,19 +287,19 @@ class TabbarMenu: UIView{
                 }, completion: nil)
             
             UIView.animateWithDuration(0.3, delay: 0.0, options: .CurveEaseOut, animations: { () -> Void in
-                self.normalRect.center = CGPoint(x: self.normalRect.center.x, y: 50.0)
+                self.normalRect.center = CGPoint(x: self.normalRect.center.x, y: 85.0) // OG: 50
                 self.blurView.alpha = 0.0
                 }, completion: nil)
             
             // inward, outward, normal
             UIView.animateWithDuration(0.2, delay:0.0, options: .CurveEaseOut, animations: { () -> Void in
-                self.springRect.center = CGPoint(x: self.springRect.center.x, y: 20.0) // Inward
+                self.springRect.center = CGPoint(x: self.springRect.center.x, y: 55.0) // Inward - 30
                 }, completion: { (finish) -> Void in
                     UIView.animateWithDuration(0.2, delay: 0.0, options: .CurveEaseOut, animations: { () -> Void in
-                        self.springRect.center = CGPoint(x: self.springRect.center.x, y: 60.0) // Outward
+                        self.springRect.center = CGPoint(x: self.springRect.center.x, y: 95.0) // Outward + 10
                         }, completion: { (finish) -> Void in
                             UIView.animateWithDuration(0.2, delay: 0.0, options: .CurveEaseOut, animations: { () -> Void in
-                                self.springRect.center = CGPoint(x: self.springRect.center.x, y: 50.0) // Normal
+                                self.springRect.center = CGPoint(x: self.springRect.center.x, y: 85.0) // Normal - equals
                                 }, completion: { (finish) -> Void in
                                     self.finishAnimation()
                             })
