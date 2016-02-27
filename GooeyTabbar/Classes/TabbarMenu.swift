@@ -198,6 +198,7 @@ class TabbarMenu: UIView{
         
         // BLUE
         normalRect = UIView(frame: CGRect(x: 0, y: tabbarheight! + 10, width: 30, height: 30))
+        print(normalRect.frame)
         normalRect.backgroundColor = UIColor.blueColor()
         normalRect.hidden = false
         keyWindow.addSubview(normalRect)
@@ -249,8 +250,8 @@ class TabbarMenu: UIView{
                     // START OF DROP DOWN ANIMATION
                     // This is the animation where entire view drops
                     // Time collision animation / effects on icons with this one
-                    print(self.frame)
-                    print(self.terminalFrame)
+                    
+//                    let myUp = CGRectMake(self.frame.origin.x, self.terminalFrame!.origin.y, self.frame.size.width, self.frame.size.height)
                     
                     UIView.animateWithDuration(0.3, delay: 0.0, options: .CurveEaseOut, animations: { () -> Void in
                         self.frame = CGRectMake(self.frame.origin.x, self.terminalFrame!.origin.y, self.frame.size.width, self.frame.size.height)
@@ -260,12 +261,14 @@ class TabbarMenu: UIView{
                     
                     // END OF DROP DOWN ANIMATION
                     UIView.animateWithDuration(0.3, delay: 0.2, options: .CurveEaseOut, animations: { () -> Void in
-                        self.normalRect.center = CGPoint(x: self.normalRect.center.x, y: 567.0)
+//                        self.normalRect.center = CGPoint(x: self.normalRect.center.x, y: myUp.size.height)
+                        self.normalRect.frame = CGRectMake(self.normalRect.frame.origin.x, self.frame.size.height - (self.normalRect.frame.size.height * 2) - self.tabbarheight! - 10, self.normalRect.frame.size.width, self.normalRect.frame.size.height)
                         self.blurView.alpha = 1.0
                         }, completion: nil)
                     
                     UIView.animateWithDuration(1.0, delay: 0.2, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.0, options: .CurveEaseOut, animations: { () -> Void in
-                        self.springRect.center = CGPoint(x: self.springRect.center.x, y: 567.0)
+//                        self.springRect.center = CGPoint(x: self.springRect.center.x, y: 567.0)
+                        self.springRect.frame = CGRectMake(self.springRect.frame.origin.x, self.frame.size.height - (self.springRect.frame.size.height * 2) - self.tabbarheight! - 10, self.springRect.frame.size.width, self.springRect.frame.size.height)
                         }, completion: { (finish) -> Void in
                             self.finishAnimation()
                     })
