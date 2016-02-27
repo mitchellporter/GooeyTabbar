@@ -135,6 +135,9 @@ class TabbarMenu: UIView{
             // Size self to match collection view
             self.frame = CGRectMake(self.frame.origin.x, -frame.height + self.tabbarheight!, UIScreen.mainScreen().bounds.size.width, self.collectionView.frame.size.height + self.TOPSPACE)
             
+            // Reset the initial frame
+            self.initialFrame = self.frame
+            
             // Setup the views
             if !self.setupViewsTracker {
             self.setupViewsTracker = true
