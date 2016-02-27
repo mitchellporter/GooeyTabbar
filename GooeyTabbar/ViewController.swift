@@ -57,14 +57,14 @@ let kidsDictionary = [
 ]
 
 let defaultFilterMenuData = [
-    trendingDictionary,
     famousPeopleDictionary,
     schoolSpiritDictionary,
     popCultureDictionary,
     placesDictionary,
     animalsDictionary,
     holidaysDictionary,
-    kidsDictionary
+    kidsDictionary,
+    trendingDictionary
 ]
 
 

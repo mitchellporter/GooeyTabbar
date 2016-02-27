@@ -44,6 +44,8 @@ class TabbarMenu: UIView{
     let TOPSPACE : CGFloat = 64.0 //留白
     private var tabbarheight : CGFloat? //tabbar高度
     
+    var selectedColor = UIColor(red:0.945,  green:0.800,  blue:0.012, alpha:1)
+    
     var cells = [BLYFilterMenuCollectionCell]()
     
     init(tabbarHeight : CGFloat)
@@ -101,8 +103,7 @@ class TabbarMenu: UIView{
         
         let context = UIGraphicsGetCurrentContext()
         CGContextAddPath(context, path.CGPath)
-        UIColor(red:0.863,  green:0.318,  blue:0.604, alpha:1).set() // Pink
-//        UIColor(red:0.945,  green:0.800,  blue:0.012, alpha:1).set() // Yellow
+        selectedColor.set()
         CGContextFillPath(context)
     }
     
@@ -414,6 +415,19 @@ extension TabbarMenu: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         //        delegate.didSelectFilterRow(indexPath)
         
+        
+        // Grab selected cell and last cell
+        let selectedCell = collectionView.cellForItemAtIndexPath(indexPath) as! BLYFilterMenuCollectionCell
+        let lastCell = cells.last
+        
+        
+        selectedColor = selectedCell.backgroundColor!
+        setNeedsDisplay()
+        lastCell?.categoryColor = selectedCell.categoryColor
+        lastCell?.label.text = selectedCell.label.text
+        lastCell?.iconImageView.image = selectedCell.iconImageView.image
+        
+        
 //         Part 1 - Play with cell z-index + cell movements
 //                let selectedCell = collectionView.cellForItemAtIndexPath(indexPath)
 //                selectedCell?.layer.zPosition = 10.0
@@ -432,8 +446,8 @@ extension TabbarMenu: UICollectionViewDelegate, UICollectionViewDataSource {
 //                }
         
         // Part 2 - move selected cell underneath the top cell
-        //        let firstCell = collectionView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1))
-        //        let firstCell = collectionView.cellForItemAtIndexPath(NSIndexPath(forRow: 0, inSection: 1))
+//                let firstCell = collectionView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1))
+//                let firstCell = collectionView.cellForItemAtIndexPath(NSIndexPath(forRow: 0, inSection: 1))
         
         
         // PART 1: Animate all cells into the first cell
@@ -466,6 +480,9 @@ extension TabbarMenu: UICollectionViewDelegate, UICollectionViewDataSource {
 //        firstCell.iconImageView.image = selectedCell.iconImageView.image
 //        firstCell.iconImageView.layer.addAnimation(CAAnimation.animationForAdditionalButton(), forKey: nil)
 //        firstCell.backgroundColor = selectedCell.backgroundColor
+        
+        // Make the very last cell look like the selected cell
+        
         
     }
 }
